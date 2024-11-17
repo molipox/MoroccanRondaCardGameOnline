@@ -6,7 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link.js'
 import FullScButton from '../Components/FullScreenButton.js'
 import GoBackPage from '../Components/GoBackPageButton.js'
-const page = () => {
+const Page = () => {
   return (
     <div className="h-screen w-screen overflow-hidden object-fill relative">
       <Image src={BgGame} alt="bgGameImage" objectFit="cover" className=" absolute -z-10" layout="fill" ></Image>
@@ -28,4 +28,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

@@ -1,17 +1,16 @@
 "use client"
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BgPlayGround, CadrePlayerName } from '../images/ImagesContainer'
 import Image from 'next/image';
-import { useState } from 'react';
 import SettingsButton from '../Components/SettingsButton';
 import FullScButton from '../Components/FullScreenButton';
 import { useSearchParams } from 'next/navigation';
 const Page = () => {
     const [imageHeight, setImageHeight] = useState(100);
     const [ClientSide,setClientSide] = useState(false);
-    const [playerNumber, setPlayerNumber] = useState(null);
-    const params = useSearchParams();
+    const [playerNumber, setPlayerNumber] = useState(2);
     useEffect(()=>{
+        const params = new URLSearchParams(window.location.search)
         if(window.innerWidth / window.innerHeight < 1.61){
             const windowAspectRatio =  window.innerWidth / window.innerHeight;
             const differenceSize = 1.61 - windowAspectRatio; 
@@ -38,14 +37,14 @@ const Page = () => {
                             <p className=' text-white text-center z-20 font-Garmania absolute mt-[0.7%] translate-x-[10%]'></p>
                         </div>
                         {
-                            playerNumber && playerNumber >= 3 && (
+                            playerNumber >= 3 && (
                                 <div className='w-[20%] top-[13%] left-[1%] absolute'>
                                     <Image src={CadrePlayerName} alt='This is the Cadre Of The Player'></Image>
                                 </div>
                             )
                         }
                         {
-                            playerNumber && playerNumber == 4 && (
+                            playerNumber == 4 && (
                                 <div className='w-[20%] bottom-[13%] right-[1%] absolute'>
                                     <Image src={CadrePlayerName} alt='This is the Cadre Of The Player'></Image>
                                 </div>
@@ -61,4 +60,3 @@ const Page = () => {
 }
 
 export default Page
-

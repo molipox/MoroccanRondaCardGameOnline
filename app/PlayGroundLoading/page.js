@@ -1,7 +1,7 @@
 import React from 'react'
 import FasilWaNaeod from '../Components/FasilWaNaeod'
 
-const page = () => {
+const Page = () => {
   return (
     <div>
       <FasilWaNaeod />
@@ -9,4 +9,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
