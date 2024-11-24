@@ -8,7 +8,7 @@ import CardMaker from '../Components/CardMaker';
 import PlayerProfileHolder from '../Components/PlayerProfileHolder';
 import Table from '../Components/Table';
 import { useGSAP } from '@gsap/react';
-import gsap, { Linear, Power1 } from 'gsap';
+import gsap from 'gsap';
 import { useRef } from 'react';
 const Page = () => {
     // refs //
@@ -46,18 +46,18 @@ const Page = () => {
         const timeline = gsap.timeline()
         const tableMiddleY = (TablePosition.bottom - cardpos.bottom) * 0.95
         const tableMiddleX = (TablePosition.x - cardpos.x) - (cardsContainer.current.getBoundingClientRect().width * (cardPosPercentage.left / 100))
-        const randomRotateDeg = Math.random() * 180
+        const randomRotateDeg = Math.random() * 90
         timeline
-         .to(`.${ClassName}`, {duration: 0.1, y: (tableMiddleY), x: (tableMiddleX), ease: Power1.easeOut})
-         .to(`.${ClassName}`, {duration: 0.7,rotate: randomRotateDeg , scale: 0.8, ease: Linear})
+        .to(`.${ClassName}`, {duration: 0.5,y: tableMiddleY, ease: "power2.out"})
+        .to(`.${ClassName}`, {duration: 1, y: (tableMiddleY), x: (tableMiddleX),delay:0.3,rotate: randomRotateDeg ,scale: 0.8, ease: "power2.out"})
         classname = "";
         count = 0;
       }else{
         count = 0;
         console.log(count)
-        gsap.to(`.${ClassName}`, {duration: 0.2, y: "-40%" , ease: "linear"})
-        gsap.to(`.${classname}`, {duration:0.2, y: 0, ease: "linear"})
-        classname = "";
+        gsap.to(`.${ClassName}`, {duration: 0.1, y: "-40%" , ease: "linear"})
+        gsap.to(`.${classname}`, {duration:0.1, y: 0, ease: "linear"})
+        classname = ClassName;
       }
     }
 
