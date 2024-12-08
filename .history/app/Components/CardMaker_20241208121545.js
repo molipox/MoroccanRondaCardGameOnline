@@ -19,7 +19,7 @@ const images = {
 };
 
                                                 
-const CardMaker = ({CardNumber, CardType, zIndex, left, bottom, rotate, HandleClick, ChangeCards, cardsContainer, TablePosition, imageHeight, index,HandleDrag,}) => {
+const CardMaker = ({ref, CardNumber, CardType, zIndex, left, bottom, rotate, HandleClick, ChangeCards, cardsContainer, TablePosition, imageHeight, index,HandleDrag, handleRef,handleTableMiddle }) => {
   const card = useRef(null);
   const imageSrc = images[CardType]?.[CardNumber - 1]; 
   let cardBottom;
@@ -27,6 +27,7 @@ const CardMaker = ({CardNumber, CardType, zIndex, left, bottom, rotate, HandleCl
   let cardX;
   let ChangeCardX;
   let cardsContainerWidth;
+  let const tableMiddleX 
   useEffect(() => {
     cardBottom = card.current.getBoundingClientRect().bottom;
     ChangeCardBottom = ChangeCards.current.getBoundingClientRect().bottom;
@@ -34,13 +35,15 @@ const CardMaker = ({CardNumber, CardType, zIndex, left, bottom, rotate, HandleCl
     ChangeCardX = ChangeCards.current.getBoundingClientRect().x;
     cardsContainerWidth = cardsContainer.current.getBoundingClientRect().width;
     console.log("useeffect 1 executed")
-  },[]);
-  useGSAP(()=>{
-        const tableMiddleY = (TablePosition.bottom - cardBottom) * 0.95;
+    const tableMiddleY = (TablePosition.bottom - cardBottom) * 0.95;
         console.log("tabposition",TablePosition)
         console.log( "card bottom",cardBottom)
         const tableMiddleX = (TablePosition.x - cardX) / 2 - (cardsContainerWidth * (left / 100));
+  },[]);
+  useGSAP(()=>{
+        
         const randomRotateDeg = Math.random() * 90;
+        handleRef(card.current,index)
         gsap.registerPlugin(Draggable);
             console.log("first condition worked")
             Draggable.create(`.Card${CardNumber}${CardType}`,{
@@ -77,7 +80,7 @@ const CardMaker = ({CardNumber, CardType, zIndex, left, bottom, rotate, HandleCl
       const tableMiddleY = (ChangeCardBottom - cardBottom)
       const tableMiddleX = (ChangeCardX - cardX) - (cardsContainerWidth * (left / 100));
       gsap.set(`.Card${CardNumber}${CardType}`, { display: "block",delay:index/5 }); 
-      gsap.from(`.Card${CardNumber}${CardType}`, {duration:0.5,x: -tableMiddleX,delay:index/5, y: -tableMiddleY,ease:"power1.out",scale:0.8})
+      gsap.from(`.Card${CardNumber}${CardType}`, {duration:0.5,x: tableMiddleX,delay:index/5, y: tableMiddleY,ease:"power1.out",scale:0.8})
     },[]);
   if(!zIndex && zIndex !== 0) return console.error("CardMaker component Need a zIndex Attribute")
   if(!left && left !== 0) return console.error("CardMaker component Need a left Attribute")

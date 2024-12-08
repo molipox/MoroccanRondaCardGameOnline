@@ -29,7 +29,7 @@ const Page = () => {
     }
 
     useEffect(()=>{
-        setPlayerhand([{CardNumber:1,CardType: "sife"},{CardNumber:2,CardType: "gur3"},{CardNumber:3,CardType: "dhb"},{CardNumber:4,CardType: "tb9"},{CardNumber:5,CardType: "sife"},{CardNumber:6,CardType: "tb9" }])
+        setPlayerhand()
         const params = new URLSearchParams(window.location.search)
         if(window.innerWidth / window.innerHeight < 1.61){
             const windowAspectRatio =  window.innerWidth / window.innerHeight;

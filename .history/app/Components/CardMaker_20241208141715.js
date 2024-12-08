@@ -77,7 +77,7 @@ const CardMaker = ({CardNumber, CardType, zIndex, left, bottom, rotate, HandleCl
       const tableMiddleY = (ChangeCardBottom - cardBottom)
       const tableMiddleX = (ChangeCardX - cardX) - (cardsContainerWidth * (left / 100));
       gsap.set(`.Card${CardNumber}${CardType}`, { display: "block",delay:index/5 }); 
-      gsap.from(`.Card${CardNumber}${CardType}`, {duration:0.5,x: -tableMiddleX,delay:index/5, y: -tableMiddleY,ease:"power1.out",scale:0.8})
+      gsap.from(`.Card${CardNumber}${CardType}`, {duration:0.5,x: tableMiddleX,delay:index/5, y: -tableMiddleY,ease:"power1.out",scale:0.8})
     },[]);
   if(!zIndex && zIndex !== 0) return console.error("CardMaker component Need a zIndex Attribute")
   if(!left && left !== 0) return console.error("CardMaker component Need a left Attribute")
